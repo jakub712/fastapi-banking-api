@@ -16,7 +16,7 @@ class Account(Base):
     __tablename__ = "Account"
 
     id = Column(Integer, primary_key=True, index=True)
-    balance = Column(Float, default=0)
+    balance_pence = Column(Integer, default=0)
     user_id = Column(Integer, ForeignKey("User.id"))
     account_type = Column(String)
 
@@ -26,7 +26,7 @@ class Transaction(Base):
     id = Column(Integer, primary_key=True, index=True)
     from_account_id = Column(Integer)
     to_account_id = Column(Integer)
-    amount = Column(Float)
+    amount_pence = Column(Integer)
     status = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     user_id = Column(Integer, ForeignKey("User.id"))

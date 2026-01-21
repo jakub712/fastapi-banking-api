@@ -30,7 +30,7 @@ def create_account(user:user_dependancy, db:db_dependency):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='user not found')
     account = Account(
         user_id = user["id"],
-        balance = 0,
+        balance_pence = 0,
     )
     db.add(account)
     db.commit()
@@ -38,7 +38,7 @@ def create_account(user:user_dependancy, db:db_dependency):
     return{
         'account_id': account.id,
         'user_id':account.user_id,
-        'balance': account.balance,
+        'balance': account.balance_pence,
         'account_type': account
     }
 
@@ -55,5 +55,5 @@ async def get_user_details(user:user_dependancy, db:db_dependency):
     return{
         'account_id':account.id,
         'user_id':account.user_id,
-        'balance':account.balance,
+        'balance':account.balance_pence,
     }
