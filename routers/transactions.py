@@ -5,8 +5,7 @@ from typing import Annotated
 from sqlalchemy.orm import Session
 from starlette import status
 from pydantic import BaseModel, Field
-from datetime import datetime, timezone
-from app.auth import get_current_user, bcrypt_context
+from app.auth import get_current_user
 
 
 router = APIRouter(prefix='/transactions', tags=['tranactions'])
