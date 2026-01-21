@@ -1,0 +1,14 @@
+# env
+.env
+.venv/
+
+# python
+__pycache__/
+*.pyc
+
+# db
+*.db
+bankingApp.db
+
+# vscode
+.vscode/
