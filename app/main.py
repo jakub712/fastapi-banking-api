@@ -1,4 +1,3 @@
-#main.py
 from fastapi import FastAPI
 import app.models as models
 from app.database import engine

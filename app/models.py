@@ -1,4 +1,3 @@
-#models.py
 from datetime import datetime
 from app.database import Base
 from sqlalchemy import Column, DateTime, ForeignKey, String, Integer, Float, Boolean
@@ -31,14 +30,3 @@ class Transaction(Base):
     status = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     user_id = Column(Integer, ForeignKey("User.id"))
-
-
-
-#class AuditLog(Base):
-#    __tablename__ = 'Audit_Log'
-
-#    id = Column(Integer, primary_key=True, index=True)
-#    user_id = Column(Integer, ForeignKey("User.id"))
-#    action = Column(String)
-#    success = Column(Boolean)
-#    created_at = Column(datetime

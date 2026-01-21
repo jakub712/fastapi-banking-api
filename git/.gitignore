@@ -1,8 +1,0 @@
-.venv/
-__pycache__/
-*.pyc
-.env
-bankingApp.db
-*.sqlite
-*.db
-alembic/versions/__pycache__/

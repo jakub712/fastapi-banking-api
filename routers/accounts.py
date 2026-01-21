@@ -1,4 +1,3 @@
-#accounts.py
 from fastapi import HTTPException, Path, Depends, APIRouter
 import app.models
 from app.models import Account, User
@@ -24,13 +23,13 @@ db_dependency = Annotated[Session, Depends(get_db)]
 user_dependancy = Annotated[dict, Depends(get_current_user)]
 
 
-@router.post("/create/{user_id}", status_code=status.HTTP_201_CREATED)
-def create_account(user:user_dependancy,user_id: int, db:db_dependency):
+@router.post("/create", status_code=status.HTTP_201_CREATED)
+def create_account(user:user_dependancy, db:db_dependency):
     if user is None:
         raise HTTPException(status_code=401, detail='authentication failed')
-    user_model = db.query(User).filter(User.id == user_id).first()
+    user_model = db.query(User).filter(user['id'] == User.id).first()
     if user_model is None:
-        raise HTTPException(status_code=404, detail='user not found')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='user not found')
     account = Account(
         user_id = user["id"],
         balance = 0,
@@ -45,13 +44,13 @@ def create_account(user:user_dependancy,user_id: int, db:db_dependency):
         'account_type': account
     }
 
-@router.get("/get_user/{user_name}", status_code=status.HTTP_200_OK)
-async def get_user(user:user_dependancy, db:db_dependency, user_name:str):
+@router.get("/get_user", status_code=status.HTTP_200_OK)
+async def get_user_details(user:user_dependancy, db:db_dependency):
     if user is None:
         raise HTTPException(status_code=401, detail='authentication failed')
-    user_model = db.query(User).filter(User.username == user_name).first()
+    user_model = db.query(User).filter(user['id'] == User.id).first()
     if user_model is None:
-        raise HTTPException(status_code=404, detail='user not found')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='user not found')
     account = db.query(Account).filter(Account.user_id == user['id']).first()
     if account is None:
         raise HTTPException(status_code=404, detail='account not found')
